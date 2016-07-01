@@ -4,6 +4,7 @@
 package member;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
 */
 public class MemberBean {
 	private String id, pw, name, regDate, gender, ssn;
-	private int age;
+	private int birth;
 	
 	public MemberBean() {}
 	
@@ -44,6 +45,10 @@ public class MemberBean {
 		}
 	}
 	
+	public void setSsn(String ssn){
+		this.ssn = ssn;
+	}
+	
 	public void setId(String id){
 		this.id = id;
 	}
@@ -56,16 +61,20 @@ public class MemberBean {
 		this.pw = pw;
 	}
 
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+	public void setRegDate() {
+		this.regDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setBirth(int birth) {
+		this.birth = birth;
 	}
 
 	public String getId() {
 		return this.id;
+	}
+	
+	public String getPw(){
+		return this.pw;
 	}
 
 	public String getName() {
@@ -84,13 +93,13 @@ public class MemberBean {
 		return this.ssn;
 	}
 
-	public int getAge() {
-		return this.age;
+	public int getBirth() {
+		return this.birth;
 	}
 
 	@Override
 	public String toString() {
 		return "id=" + id + ", pw=" + pw + ", 이름=" + name + ", 등록일=" + regDate + ", 성별=" + gender
-				+ ", 주민번호=" + ssn + ", 나이=" + age;
+				+ ", 주민번호=" + ssn + ", 나이=" + birth;
 	}
 }

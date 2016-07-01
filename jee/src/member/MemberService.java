@@ -10,8 +10,8 @@ package member;
  * @story  :
 */
 public interface MemberService {
-	public void registStudent(String id, String pw, String name, String ssn);
-	public String showStudent();
-	public void updateStudent(String pw);
-	public void deleteStudent();
+	public String regist(MemberBean bean);
+	public String show();
+	public void update(String pw);
+	public void delete();
 }
