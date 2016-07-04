@@ -1,9 +1,16 @@
 package grade;
 
+import java.util.List;
+
 public interface GradeService {
-	public void inputGrade(String score);
-	public String calGrade();
-	public int avgCal();
-	public int totCal();
-	public String showScore();
+	// 총 7개의 기본패턴
+	//exeU
+	public int insert(GradeBean bean);
+	public int update(GradeBean bean);
+	public int delete(GradeBean bean);
+	//exeQ
+	public List<GradeBean> list();
+	public List<GradeBean> findByHakjum(String hakjum);
+	public GradeBean findBySeq(int seq);
+	public int count();
 }

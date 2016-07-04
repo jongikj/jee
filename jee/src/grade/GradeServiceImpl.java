@@ -1,55 +1,55 @@
 package grade;
 
+import java.util.List;
+
 public class GradeServiceImpl implements GradeService {
-	GradeBean grade = new GradeBean();
-
-	@Override
-	public void inputGrade(String score) {
-		String[] gradeArr = score.split(",");
-		grade.setName(gradeArr[0]);
-		grade.setKor(Integer.parseInt(gradeArr[1]));
-		grade.setEng(Integer.parseInt(gradeArr[2]));
-		grade.setMath(Integer.parseInt(gradeArr[3]));
+	private static GradeServiceImpl instance = new GradeServiceImpl();
+	
+	private GradeServiceImpl() {}
+	
+	public static GradeServiceImpl getInstance() {
+		return instance;
 	}
 
 	@Override
-	public String calGrade() {
-		String grade;
-
-		switch ((avgCal()) / 10) {
-		case 10:
-		case 9:
-			grade = "A";
-			break;
-		case 8:
-			grade = "B";
-			break;
-		case 7:
-			grade = "C";
-			break;
-		case 6:
-			grade = "D";
-			break;
-		case 5:
-			grade = "E";
-			break;
-		default:
-			grade = "F";
-		}
-		return grade;
+	public int insert(GradeBean bean) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public int avgCal() {
-		return (totCal()) / 3;
+	public int update(GradeBean bean) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public int totCal() {
-		return grade.getKor() + grade.getEng() + grade.getMath();
+	public int delete(GradeBean bean) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
-	public String showScore() {
-		return this.grade.toString() + ", 총점 : " + totCal() + ", 평균 : " + avgCal() + ", 학점 : " + calGrade();
+	@Override
+	public List<GradeBean> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GradeBean> findByHakjum(String hakjum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GradeBean findBySeq(int seq) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

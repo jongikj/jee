@@ -27,21 +27,37 @@ public class GradeController {
 	 * 단, switch-case 문을 이용.
 	 * */
 	public static void main(String[] args) {
-		GradeService service = new GradeServiceImpl();
-
+		GradeService service = GradeServiceImpl.getInstance();
+		GradeDAO dao = GradeDAO.getInstance();
 		while (true) {
-			switch (JOptionPane.showInputDialog("1.시작 0.종료")) {
+			switch (JOptionPane.showInputDialog(
+					"1추가 2수정 3삭제 4전체조회 5학점조회 6시퀀스조회 7응시생수 0종료")) {
 			case "1":
-				service.inputGrade(JOptionPane.showInputDialog("이름,국어,영어,수학"));
-				JOptionPane.showMessageDialog(null, service.showScore());
 				break;
 
-			default:
-				if (JOptionPane.showConfirmDialog(null, "Closing?") == 0) {
-				} else {
-					continue;
-				}
+			case "2":
+				break;
+				
+			case "3":
+				break;
+				
+			case "4":
+				break;
+				
+			case "5":
+				break;
+				
+			case "6":
+				break;
+				
+			case "7":
+				break;
+				
+			case "0":
 				return;
+
+			default:
+				break;
 			}
 		}
 	}

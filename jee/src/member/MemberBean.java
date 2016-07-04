@@ -64,6 +64,10 @@ public class MemberBean {
 	public void setRegDate() {
 		this.regDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
 	}
+	
+	public void setRegDate(String regDate){
+		this.regDate = regDate;
+	}
 
 	public void setBirth(int birth) {
 		this.birth = birth;

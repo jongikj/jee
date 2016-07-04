@@ -8,17 +8,17 @@ reg_date varchar2(20),
 ssn varchar2(10)
 );
 -- CREATE
-insert into member(id,pw,name,reg_date,ssn)
-values('lee','1','이순신','2016-07-01','800101-1');
-
-insert into member(id,pw,name,reg_date,ssn)
-values('hong','1','홍길동','2015-07-01','891201-1');
-
-insert into member(id,pw,name,reg_date,ssn)
-values('yu','1','유관순','2014-07-01','010701-1');
+insert into member(id,pw,name,reg_date,ssn) values('lee','1','이순신','2016-07-01','800101-1');
+insert into member(id,pw,name,reg_date,ssn) values('hong','1','홍길동','2015-06-01','891201-1');
+insert into member(id,pw,name,reg_date,ssn) values('hong2','1','홍길동','2014-04-01','901211-1');
+insert into member(id,pw,name,reg_date,ssn) values('hong3','1','홍길동','2016-04-01','880501-1');
+insert into member(id,pw,name,reg_date,ssn) values('yu','1','유관순','2014-07-01','010701-1');
 -- READ
-select * from MEMBER where id = 'lee';
+select * from MEMBER;	-- list
+select * from MEMBER where id = 'hong';	-- findByPK
+select * from MEMBER where name = '홍길동';	  -- findByNotPK	
+select count(*) as count from MEMBER; -- count
 -- UPDATE
 update member set pw = '999' where id = 'yu';
 -- DELETE
-delete from member where id = 'park';
+delete from member where id = 'jang';

@@ -1,8 +1,16 @@
 package grade;
 
 public class GradeBean {
-	private int kor, eng, math;
-	private String name;
+	private int kor, eng, math, seq;
+	private String name, hakjum;
+
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
 
 	public int getKor() {
 		return kor;

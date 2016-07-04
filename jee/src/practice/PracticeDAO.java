@@ -1,8 +1,7 @@
-package grade;
+package practice;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -11,30 +10,28 @@ import global.Constants;
 /**
  * @date   :2016. 7. 1.
  * @author :장종익
- * @file   :GradeDAO.java
+ * @file   :PracticeDAO.java
  * @story  :
 */
-public class GradeDAO {
+public class PracticeDAO {
 	Connection con = null;
 	Statement stmt = null;
-	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	private static GradeDAO instance = new GradeDAO();
+	private static PracticeDAO instance = new PracticeDAO();
 
-	public static GradeDAO getInstance() {
+	public static PracticeDAO getInstance() {
 		return instance;
 	}
 
-	private GradeDAO() {}
-	
-	public int exeUpdate(String sql){
+	private PracticeDAO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void executeUpdate(String sql) {
 		int updateResult = 0;
 		try {
 			Class.forName(Constants.ORACLE_DRIVER);
-			con = DriverManager.getConnection(
-					Constants.ORACLE_URL,
-					Constants.ORACLE_ID,
-					Constants.ORACLE_PW);
+			con = DriverManager.getConnection(Constants.ORACLE_URL, Constants.ORACLE_ID, Constants.ORACLE_PW);
 			stmt = con.createStatement();
 			updateResult = stmt.executeUpdate(sql);
 		} catch (Exception e) {
@@ -46,6 +43,5 @@ public class GradeDAO {
 		} else {
 			System.out.println("실패");
 		}
-		return updateResult;
 	}
 }

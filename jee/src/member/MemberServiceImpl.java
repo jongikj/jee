@@ -1,5 +1,6 @@
 package member;
 
+import java.util.List;
 
 /**
  * @date   :2016. 6. 20.
@@ -22,10 +23,8 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public String regist(MemberBean bean) {
 		String msg = "";
-		String sql = "insert into member(id, pw, name, reg_date, ssn)"
-				+ "values('" + bean.getId() + "', '" + bean.getPw() + "', '" + bean.getName() + "', '"
-				+ bean.getRegDate() + "', '" + bean.getSsn() + "')";
-		int result = dao.exeUpdate(sql);
+	
+		int result = dao.insert(bean);
 		
 		if (result == 1 ){
 			msg = "회원가입 축하합니다";
@@ -41,16 +40,47 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void update(String pw) {
-		st.setPw(pw);
+	public String update(MemberBean bean) {
+		String result = "";
+		if (dao.update(bean) == 1) {
+			result = "수정 성공";
+		} else {
+			result = "수정 실패";
+		}
+		return result;
 	}
 
 	@Override
-	public void delete() {
-		st = null;
+	public String delete(String id) {
+		String result = "";
+		if (dao.delete(id) == 1) {
+			result = "삭제성공";
+		} else {
+			result = "삭제실패";
+		}
+		return result;
+	}
+	
+	public int count(){
+		return dao.count();
 	}
 
+	@Override
+	public MemberBean findById(String findID) {
+		return dao.findById(findID);
+	}
+
+	@Override
+	public List<MemberBean> list() {
+		return dao.list();
+	}
+
+	@Override
+	public List<MemberBean> findByName(String findName) {
+		return dao.findByName(findName);
+	}
 }
+
 /*
 String sqlCreate = "create table member("
 		+ "id varchar2(20) primary key,"
