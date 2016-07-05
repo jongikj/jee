@@ -1,51 +1,114 @@
 package grade;
 
 public class GradeBean {
-	private int kor, eng, math, seq;
-	private String name, hakjum;
-
-	public int getSeq() {
+	private String id, grade, seq, examDate;
+	private int java, sql, html, javascript;
+	
+	public GradeBean() {}
+	
+	public GradeBean(String seq, String grade, int java, int sql, int html, int javascript, String id, String examDate) {
+		this.seq = seq;
+		this.grade = grade;
+		this.java = java;
+		this.sql = sql;
+		this.html = html;
+		this.javascript = javascript;
+		this.id = id;
+		this.examDate = examDate;
+	}
+	
+	public String getSeq() {
 		return seq;
 	}
 
-	public void setSeq(int seq) {
+	public void setSeq(String seq) {
 		this.seq = seq;
 	}
 
-	public int getKor() {
-		return kor;
+	public int getJava() {
+		return java;
+	}
+	
+	public void setJava(int java) {
+		this.java = java;
+	}
+	
+	public int getSql() {
+		return sql;
+	}
+	
+	public void setSql(int sql) {
+		this.sql = sql;
+	}
+	
+	public int getHtml() {
+		return html;
+	}
+	
+	public void setHtml(int html) {
+		this.html = html;
+	}
+	
+	public int getJavascript() {
+		return javascript;
+	}
+	
+	public void setJavascript(int javascript) {
+		this.javascript = javascript;
+	}
+	
+	public String getId() {
+		return id;
 	}
 
-	public void setKor(int kor) {
-		this.kor = kor;
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getGrade() {
+		int total = (java + sql + html + javascript) / 4;
+		switch (total / 10) {
+		case 10:
+		case 9:
+			this.grade = "A";
+			break;
+		case 8:
+			this.grade = "B";
+			break;
+		case 7:
+			this.grade = "C";
+			break;
+		case 6:
+			this.grade = "D";
+			break;
+		case 5:
+			this.grade = "E";
+			break;
+		default:
+			this.grade = "F";
+		}
+		return this.grade;
+	}
+	
+	public void setGrade(int java, int sql, int html, int javascript) {
+		this.java = java;
+		this.sql = sql;
+		this.html = html;
+		this.javascript = javascript;
+	}
+	
+	public String getExamDate() {
+		return examDate;
 	}
 
-	public int getEng() {
-		return eng;
-	}
-
-	public void setEng(int eng) {
-		this.eng = eng;
-	}
-
-	public int getMath() {
-		return math;
-	}
-
-	public void setMath(int math) {
-		this.math = math;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setExamDate(String examDate) {
+		this.examDate = examDate;
 	}
 
 	@Override
 	public String toString() {
-		return "이름 : " + name + ", 국어 : " + kor + ", 영어 : " + eng + ", 수학 : " + math;
+		return "성적표 [No." + seq + ", ID : " + id + ", 학점=" + grade + ", 자바=" + java + ", sql=" + sql
+				+ ", HTML5=" + html + ", 자바스크립트=" + javascript + "]\n";
 	}
+
 }

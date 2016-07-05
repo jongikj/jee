@@ -3,6 +3,7 @@ package grade;
 import java.util.List;
 
 public class GradeServiceImpl implements GradeService {
+	GradeDAO dao = GradeDAO.getInstance();
 	private static GradeServiceImpl instance = new GradeServiceImpl();
 	
 	private GradeServiceImpl() {}
@@ -12,44 +13,55 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public int insert(GradeBean bean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String insert(GradeBean bean) {
+		String msg = "";
+		if (dao.insert(bean) == 1){
+			msg = "추가성공";
+		} else {
+			msg = "추가실패";
+		}
+		return msg;
 	}
 
 	@Override
-	public int update(GradeBean bean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String update(String sub, GradeBean bean) {
+		String msg = "";
+		if (dao.update(sub, bean) == 1) {
+			msg = "수정성공";
+		} else {
+			msg = "수정실패";
+		}
+		return msg;
 	}
 
 	@Override
-	public int delete(GradeBean bean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String delete(String seq) {
+		String msg = "";
+		if (dao.delete(seq) == 1) {
+			msg = "삭제성공";
+		} else {
+			msg = "삭제실패";
+		}
+		return msg;
 	}
 
 	@Override
 	public List<GradeBean> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.list();
 	}
 
 	@Override
-	public List<GradeBean> findByHakjum(String hakjum) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GradeBean> findById(String id) {
+		return dao.findById(id);
 	}
 
 	@Override
-	public GradeBean findBySeq(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+	public GradeBean findBySeq(String seq) {
+		return dao.findBySeq(seq);
 	}
 
 	@Override
-	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int count(String date) {
+		return dao.count(date);
 	}
 }

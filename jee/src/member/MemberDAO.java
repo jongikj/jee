@@ -18,10 +18,10 @@ import global.Constants;
 */
 
 public class MemberDAO {
-	Connection con = null;
-	Statement stmt = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;	//executeQuery() 에서만 리턴받는 객체
+	Connection con;
+	Statement stmt;
+	PreparedStatement pstmt;
+	ResultSet rs;	//executeQuery() 에서만 리턴받는 객체
 	private static MemberDAO instance = new MemberDAO();	// 2.private static형 DAO로 생성한다. 이름은 instance
 	
 	public static MemberDAO getInstance() {	// 3. instnace의 getter만 만들어준다.
@@ -55,8 +55,8 @@ public class MemberDAO {
 			Class.forName(Constants.ORACLE_DRIVER);
 			con = DriverManager.getConnection(
 					Constants.ORACLE_URL, 
-					Constants.ORACLE_ID, 
-					Constants.ORACLE_PW);
+					Constants.USER_ID, 
+					Constants.USER_PW);
 			stmt = con.createStatement();
 			updateResult = stmt.executeUpdate(sql);
 		} catch (Exception e) {
@@ -80,8 +80,8 @@ public class MemberDAO {
 			Class.forName(Constants.ORACLE_DRIVER);
 			con = DriverManager.getConnection(
 					Constants.ORACLE_URL,
-					Constants.ORACLE_ID,
-					Constants.ORACLE_PW);
+					Constants.USER_ID,
+					Constants.USER_PW);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			
@@ -109,8 +109,8 @@ public class MemberDAO {
 			Class.forName(Constants.ORACLE_DRIVER);
 			con = DriverManager.getConnection(
 					Constants.ORACLE_URL,
-					Constants.ORACLE_ID,
-					Constants.ORACLE_PW);
+					Constants.USER_ID,
+					Constants.USER_PW);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			while (rs.next()){
@@ -137,8 +137,8 @@ public class MemberDAO {
 			Class.forName(Constants.ORACLE_DRIVER);
 			con = DriverManager.getConnection(
 					Constants.ORACLE_URL,
-					Constants.ORACLE_ID,
-					Constants.ORACLE_PW);
+					Constants.USER_ID,
+					Constants.USER_PW);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			
@@ -166,8 +166,8 @@ public class MemberDAO {
 			Class.forName(Constants.ORACLE_DRIVER);
 			con = DriverManager.getConnection(
 					Constants.ORACLE_URL,
-					Constants.ORACLE_ID,
-					Constants.ORACLE_PW);
+					Constants.USER_ID,
+					Constants.USER_PW);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 
