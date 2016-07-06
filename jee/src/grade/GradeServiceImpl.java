@@ -24,10 +24,10 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public String update(String sub, GradeBean bean) {
+	public String update(String seq, String sub, GradeBean bean) {
 		String msg = "";
-		if (dao.update(sub, bean) == 1) {
-			msg = "수정성공";
+		if (dao.update(seq, sub, bean) == 1) {
+			msg = "수정완료";
 		} else {
 			msg = "수정실패";
 		}
@@ -46,8 +46,14 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
+	public GradeBean findBySeq(String seq) {
+		return dao.findBySeq(seq);
+	}
+	
+	@Override
 	public List<GradeBean> list() {
-		return dao.list();
+		List<GradeBean> list = dao.list();
+		return list;
 	}
 
 	@Override
@@ -55,13 +61,9 @@ public class GradeServiceImpl implements GradeService {
 		return dao.findById(id);
 	}
 
-	@Override
-	public GradeBean findBySeq(String seq) {
-		return dao.findBySeq(seq);
-	}
 
 	@Override
-	public int count(String date) {
-		return dao.count(date);
+	public int count(String examDate) {
+		return dao.count(examDate);
 	}
 }

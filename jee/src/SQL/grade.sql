@@ -36,9 +36,39 @@ select * from grade where id = 'hong';
 select count(*) from grade where exam_date = '2016-06';
 
 --UPDATE : update
-update grade set exam_date = '2016-05', java = 77 where seq = 1000;
+update grade set java = 20, grade = 'A' where seq = 1000;
 
 --DELETE : delete
 delete from grade where seq = 1007;
 
 select count(*) as count from grade where exam_date = '2016-06';
+
+----------------------------------------------------------------
+
+-- 뷰 권한주기
+sqlplus system/hanbit;
+grant dba to hanbit;
+
+create view grade_view as select * from grade;
+
+select * from grade_view;
+
+-- join 조인
+create view grade_member as
+select 
+	g.seq as seq,
+	g.grade as grade,
+	g.java as java,
+	g.sql as sql,
+	g.html as html,
+	g.javascript as js,
+	g.exam_date as exam_date,
+	m.id as id,
+	m.pw as pw,
+	m.name as name,
+	m.reg_date as reg_date,
+	m.ssn as ssn
+from member m, grade g 
+where m.id = g.id;
+
+select * from grade_member;

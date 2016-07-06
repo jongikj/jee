@@ -17,10 +17,12 @@ public class DatabaseFactory {
 			driver = Constants.ORACLE_DRIVER;
 			url = Constants.ORACLE_URL;
 			break;
+			
 		case MYSQL: 
 			driver = Constants.MYSQL_DRIVER;
 			url = Constants.MYSQL_URL;
 			break;
+			
 		case MSSQL: break;
 		case MARIADB: break;
 		default:

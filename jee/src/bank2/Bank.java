@@ -1,7 +1,7 @@
 /**
  * 
  */
-package bank;
+package bank2;
 
 import javax.swing.JOptionPane;
 

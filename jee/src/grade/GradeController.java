@@ -2,6 +2,7 @@ package grade;
 
 import java.util.Scanner;
 
+import javax.print.attribute.standard.JobMessageFromOperator;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,35 +49,35 @@ public class GradeController {
 
 			case "2":
 				GradeBean temp2 = new GradeBean();
-				String inputUpdate = JOptionPane.showInputDialog("시퀀스 입력");
-				temp2.setSeq(inputUpdate);
-				switch (JOptionPane.showInputDialog("1자바 2SQL 3HTML 4자바스크립트")) {
-				case "1":
-					String subJava = "java";
-					String javaInput = JOptionPane.showInputDialog("자바점수");
-					temp2.setJava(Integer.parseInt(javaInput));
-					service.update(subJava, temp2);
+				String sub = "";
+				String upSeq = JOptionPane.showInputDialog("점수 수정할 시퀀스");
+				switch (JOptionPane.showInputDialog("1.자바, 2.SQL, 3.HTML, 4.자바스크립트")){
+				case "1": 
+					String java = JOptionPane.showInputDialog("자바 점수 수정");
+					sub = "java";
+					temp2.setJava(Integer.parseInt(java));
+					service.update(upSeq, sub, temp2);
 					break;
-
+				
 				case "2":
-					String subSql = "sql";
-					String sqlInput = JOptionPane.showInputDialog("SQL점수");
-					temp2.setSql(Integer.parseInt(sqlInput));
-					service.update(subSql, temp2);
+					String sql = JOptionPane.showInputDialog("SQL 점수 수정");
+					sub = "sql";
+					temp2.setSql(Integer.parseInt(sql));
+					JOptionPane.showMessageDialog(null, service.update(upSeq, sub, temp2));
 					break;
-
-				case "3":
-					String subHtml = "html";
-					String htmlInput = JOptionPane.showInputDialog("HTML점수");
-					temp2.setHtml(Integer.parseInt(htmlInput));
-					service.update(subHtml, temp2);
+				
+				case "3": 
+					String html = JOptionPane.showInputDialog("HTML 점수 수정");
+					sub = "html";
+					temp2.setHtml(Integer.parseInt(html));
+					service.update(upSeq, sub, temp2);
 					break;
-
-				case "4":
-					String subJavascript = "javascript";
-					String javascriptInput = JOptionPane.showInputDialog("자바스크립트 점수");
-					temp2.setJavascript(Integer.parseInt(javascriptInput));
-					service.update(subJavascript, temp2);
+				
+				case "4": 
+					String javascript = JOptionPane.showInputDialog("자바스크립트 점수 수정");
+					sub = "javascript";
+					temp2.setJavascript(Integer.parseInt(javascript));
+					service.update(upSeq, sub, temp2);
 					break;
 				}
 				break;
@@ -87,22 +88,22 @@ public class GradeController {
 				break;
 				
 			case "4":
-				JOptionPane.showMessageDialog(null, service.list());
+				GradeUI ui = new GradeUI();
 				break;
 				
 			case "5":
-				String tempInput = JOptionPane.showInputDialog("조회할 시퀀스");
-				JOptionPane.showMessageDialog(null, service.findBySeq(tempInput));
+				String seq = JOptionPane.showInputDialog("조회할 SEQ");
+				JOptionPane.showMessageDialog(null, service.findBySeq(seq));
 				break;
 				
 			case "6":
-				String inputId = JOptionPane.showInputDialog("조회할 ID");
-				JOptionPane.showMessageDialog(null, service.findById(inputId));
+				String id = JOptionPane.showInputDialog("조회할 ID");
+				JOptionPane.showMessageDialog(null, service.findById(id));
 				break;
 				
 			case "7":
-				String inputDate = JOptionPane.showInputDialog("날짜입력");
-				JOptionPane.showMessageDialog(null, service.count(inputDate) + "명");
+				String examDate = JOptionPane.showInputDialog("조회하려는 시험일자 (예:2016-05)");
+				JOptionPane.showMessageDialog(null, service.count(examDate) + "명");
 				break;
 				
 			case "0":

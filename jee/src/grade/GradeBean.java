@@ -90,7 +90,8 @@ public class GradeBean {
 		return this.grade;
 	}
 	
-	public void setGrade(int java, int sql, int html, int javascript) {
+	public void setGrade(String grade, int java, int sql, int html, int javascript) {
+		this.grade = grade;
 		this.java = java;
 		this.sql = sql;
 		this.html = html;
