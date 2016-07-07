@@ -26,7 +26,6 @@ public class Database {
 			con = DriverManager.getConnection(url, id, pw);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return con;

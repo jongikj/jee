@@ -25,4 +25,11 @@ select
 from member m, account a 
 where m.id = a.id;
 
-select * from account_member;
+select * from account_member where account_no = 303925;
+
+select * from ACCOUNT_MEMBER;
+
+
+delete from account where id = 'lee';
+
+insert into account(account_no, id) values (1000,'lee');

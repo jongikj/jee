@@ -1,8 +1,35 @@
+----------------------[내부 스키마 (물리적)]---------------------------
 create table account(
 	account_no int primary key,  
 	money int, 
-	pw varchar2(20) 
+	id varchar2(20),
+	constraint account_member_fk foreign key (id) references member(id) on delete cascade
 );
 
-select * from account;
+-----------------------[외부 스키마 (논리적[가상])]------------------------------
+create view account_member as 
+select 
+	a.account_no as account_no,  --이름이 같으면 as 생략가능.  
+	a.money as money, 
+    m.id as id,
+	m.pw as pw, 
+    m.name as name,
+    m.reg_date as reg_date,
+    m.ssn as ssn
+from member m, account a where m.id = a.id;
+
+select * from account_member;
+
 drop table account;
+drop view account_member;
+
+
+
+
+
+
+
+
+
+
+
