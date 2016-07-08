@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import global.Constants;
 import global.DatabaseFactory;
@@ -105,23 +107,27 @@ public class AccountDAO {
 		return result;
 	}
 
-	public List<AccountBean> accountList() {
-		List<AccountBean> list = new ArrayList<AccountBean>();
-		String sql = "select * from account_member";
+	public List<?> selectAll() {
+		List<AccountMemberBean> list = new ArrayList<AccountMemberBean>();
+		String sql = "select "
+				+ "account_no as acc,"
+				+ "id as id,"
+				+ "name as name,"
+				+ "money as money,"
+				+ "ssn as birth"
+				+ " from account_member"
+				+ " order by name";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
  			rs = pstmt.executeQuery(); 
- 			
  			while (rs.next()){
- 				AccountBean bean = new AccountBean();
- 				bean.setAccountNo(rs.getInt("ACCOUNT_NO"));
- 				bean.setMoney(rs.getInt("MONEY"));
+ 				AccountMemberBean bean = new AccountMemberBean();
+ 				bean.setAccountNo(rs.getInt("ACC"));
  				bean.setId(rs.getString("ID"));
- 				bean.setPw(rs.getString("PW"));
  				bean.setName(rs.getString("NAME"));
- 				bean.setRegDate(rs.getString("REG_DATE"));
- 				bean.setSsn(rs.getString("SSN"));
+ 				bean.setMoney(rs.getInt("MONEY"));
+ 				bean.setBirth(rs.getString("BIRTH").substring(0, 6));	//0 이상 6 미만의 인덱스를 뽑아낸다
  				list.add(bean);
  			}
 		} catch (Exception e) {
@@ -157,7 +163,7 @@ public class AccountDAO {
 		return bean;
 	}
 
-	public List<AccountBean> findByName(String name) {
+	public List<?> findByName(String name) {
 		List<AccountBean> list = new ArrayList<AccountBean>();
 		String sql = "select * from account_member where name = ?";
 
@@ -220,5 +226,29 @@ public class AccountDAO {
 			e.printStackTrace();
 		}
 		return money;
+	}
+
+	public Map<?, ?> selectMap() {
+		Map<String, AccountMemberBean> map = new HashMap<String, AccountMemberBean>();
+		String sql = "select * from account_member";
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				AccountMemberBean bean = new AccountMemberBean();
+				bean.setAccountNo(rs.getInt("ACCOUNT_NO"));
+				bean.setId(rs.getString("ID"));
+				bean.setMoney(rs.getInt("MONEY"));
+				bean.setName(rs.getString("NAME"));
+				bean.setPw(rs.getString("PW"));
+				bean.setRegDate(rs.getString("REG_DATE"));
+				bean.setSsn(rs.getString("SSN"));
+				map.put(String.valueOf(bean.getAccountNo()), bean);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
 	}
 }

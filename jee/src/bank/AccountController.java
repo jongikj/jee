@@ -16,7 +16,7 @@ public class AccountController {
 		AccountService service = AccountServiceImpl.getInstance();
 		
 		while(true) {
-			switch(JOptionPane.showInputDialog("1.개설 2.입금 3.출금 4.수정 5.해지 6.조회(전체) 7.조회(계좌번호) 8.조회(이름) 9.조회(전체통장 수) 0.종료")){
+			switch(JOptionPane.showInputDialog("1.개설 2.입금 3.출금 4.수정 5.해지 6.조회(전체) 7.조회(계좌번호) 8.조회(이름) 9.조회(전체통장 수) 10.로그인 0.종료")){
 				case "1" :
 					String id = JOptionPane.showInputDialog("ID입력");
 					JOptionPane.showMessageDialog(null, service.openAccount(id));
@@ -39,6 +39,7 @@ public class AccountController {
 					temp4.setId(arr4[0]);
 					temp4.setPw(arr4[1]);
 					JOptionPane.showMessageDialog(null, service.updateAccount(temp4));
+					break;
 					
 				case "5" :
 					String delete = JOptionPane.showInputDialog("삭제할 계좌번호");
@@ -46,7 +47,8 @@ public class AccountController {
 					break;
 					
 				case "6" :
-					JOptionPane.showMessageDialog(null, service.accountList());
+					BankUI ui = new BankUI();
+//					JOptionPane.showMessageDialog(null, service.accountList());
 					break;
 					
 				case "7" :
@@ -56,11 +58,14 @@ public class AccountController {
 					
 				case "8" : 
 					String name = JOptionPane.showInputDialog("조회할 이름");
-					JOptionPane.showMessageDialog(null, service.findByName(name));
+					JOptionPane.showMessageDialog(null, service.findBy(name));
 					break;
 					
 				case "9" :
 					JOptionPane.showMessageDialog(null, service.count() + "명");
+					break;
+					
+				case "10" :
 					break;
 					
 				case "0" : 

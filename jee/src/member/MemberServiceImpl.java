@@ -1,6 +1,10 @@
 package member;
 
 import java.util.List;
+import java.util.Map;
+
+import bank.AccountService;
+import bank.AccountServiceImpl;
 
 /**
  * @date   :2016. 6. 20.
@@ -9,8 +13,10 @@ import java.util.List;
  * @story  :
 */
 public class MemberServiceImpl implements MemberService{
+	MemberBean session;	
 	MemberBean st = null;
 	MemberDAO dao = MemberDAO.getInstance();	// 4.DAO의 getInstance() 메소드를 호출한다 (싱글톤 패턴)
+	AccountService accService = AccountServiceImpl.getInstance();
 	private static MemberServiceImpl instance = new MemberServiceImpl();
 	
 	private MemberServiceImpl() {
@@ -32,11 +38,6 @@ public class MemberServiceImpl implements MemberService{
 			msg = "회원가입 실패";
 		}
 		return msg;
-	}
-
-	@Override
-	public String show() {
-		return st.toString();
 	}
 
 	@Override
@@ -79,15 +80,28 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberBean> findByName(String findName) {
 		return dao.findByName(findName);
 	}
-}
 
-/*
-String sqlCreate = "create table member("
-		+ "id varchar2(20) primary key,"
-		+ "pw varchar2(20),"
-		+ "name varchar2(20),"
-		+ "reg_date varchar2(20),"
-		+ "ssn varchar2(10),"
-		+ ")";
-String sqlDrop = "drop table member";
- 										*/
+	@Override
+	public List<?> findBy(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<?, ?> map() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public String login(MemberBean bean) {
+		String result = "";
+		if (dao.login(bean)) {
+			result = "로그인 성공";
+			session = dao.findById(bean.getId());
+			accService.map();
+		} else {
+			result = "로그인 실패";
+		}
+		return result;
+	}
+}

@@ -180,4 +180,13 @@ public class MemberDAO {
 		}
 		return count;
 	}
+
+	public boolean login(MemberBean bean) {
+		boolean loginOK = false;
+		MemberBean m = this.findById(bean.getId());
+		if (m.getPw().equals(bean.getPw())){
+			loginOK = true;
+		}
+		return loginOK;
+	}
 }

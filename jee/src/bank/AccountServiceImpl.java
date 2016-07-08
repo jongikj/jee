@@ -3,7 +3,9 @@
  */
 package bank;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @date   :2016. 6. 20.
@@ -14,12 +16,15 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
 	private static AccountServiceImpl instance = new AccountServiceImpl();
 	AccountDAO dao = AccountDAO.getInstance();
+	private Map<?, ?> map; 
 	
 	public static AccountServiceImpl getInstance() {
 		return instance;
 	}
 
-	private AccountServiceImpl() {}
+	private AccountServiceImpl() {
+		map = new HashMap<String, AccountMemberBean>();
+	}
 	
 	@Override
 	public String openAccount(String id) {
@@ -91,8 +96,8 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public List<AccountBean> accountList() {
-		return dao.accountList();
+	public List<?> list() {
+		return dao.selectAll();
 	}
 
 	@Override
@@ -101,7 +106,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public List<AccountBean> findByName(String name) {
+	public List<?> findBy(String name) {
 		return dao.findByName(name);
 	}
 
@@ -113,5 +118,12 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public int restMoney(int accountNo) {
 		return dao.selectMoney(accountNo);
+	}
+
+	@Override
+	public Map<?, ?> map() {
+		map = new HashMap<String, AccountMemberBean>();
+		map  = dao.selectMap();
+		return map;
 	}
 }

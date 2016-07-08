@@ -1,16 +1,15 @@
 package grade;
 
-import java.util.List;
+import global.CommonService;
 
-public interface GradeService {
+public interface GradeService extends CommonService{
 	// 총 7개의 기본패턴
 	//exeU
 	public String insert(GradeBean bean);
+	public GradeBean findBySeq(String seq);
 	public String update(String seq, String sub, GradeBean bean);
 	public String delete(String seq);
 	//exeQ
-	public List<GradeBean> list();
-	public List<GradeBean> findById(String id);
-	public GradeBean findBySeq(String seq);
+	public void score(String[] arr);
 	public int count(String examDate);
 }

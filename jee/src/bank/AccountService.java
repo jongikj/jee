@@ -4,6 +4,9 @@
 package bank;
 
 import java.util.List;
+import java.util.Map;
+
+import global.CommonService;
 
 /**
  * @date   :2016. 6. 20.
@@ -11,7 +14,7 @@ import java.util.List;
  * @file   :AccountService.java
  * @story  :
 */
-public interface AccountService { 
+public interface AccountService extends CommonService { 
 	// 1.개설
 	public String openAccount(String id);
 	// 2.입금
@@ -22,14 +25,8 @@ public interface AccountService {
 	public String updateAccount(AccountBean bean);
 	// 5.해지
 	public String deleteAccount(int accountNo);
-	// READ : 6.조회 (전체)
-	public List<AccountBean> accountList();	//빅빈을 사용한다 빈은 사용하지 않는다
 	// READ : 7.조회 (계좌번호)
 	public AccountBean findByAccountNo(int searchAcc);
-	// READ : 8.조회 (이름)
-	public List<AccountBean> findByName(String name);
-	// READ : 9.조회 (전체통장 수)
-	public int count();
 	// 필요에 따라 생성하는 메소드
 	public int restMoney(int accountNo);
 }

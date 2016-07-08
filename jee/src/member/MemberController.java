@@ -40,7 +40,7 @@ public class MemberController {
 				break;
 				
 			case "2":
-				JOptionPane.showMessageDialog(null, Constants.SCHOOL_NAME + ", " + service.show());
+//				JOptionPane.showMessageDialog(null, Constants.SCHOOL_NAME + ", " + service.show());
 				break;
 				
 			case "4":

@@ -98,7 +98,7 @@ public class GradeController {
 				
 			case "6":
 				String id = JOptionPane.showInputDialog("조회할 ID");
-				JOptionPane.showMessageDialog(null, service.findById(id));
+				JOptionPane.showMessageDialog(null, service.findBy(id));
 				break;
 				
 			case "7":

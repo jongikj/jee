@@ -94,7 +94,7 @@ public class GradeDAO {
 		return result;
 	}	
 	
-	public List<GradeBean> list(){
+	public List<?> list(){
 		List<GradeBean> list = new ArrayList<GradeBean>();
 		String sql = "select * from grade";
 		
@@ -148,7 +148,7 @@ public class GradeDAO {
 		return bean;
 	}
 	
-	public List<GradeBean> findById(String id){
+	public List<?> findById(String id){
 		List<GradeBean> list = new ArrayList<GradeBean>();
 		String sql = "select * from grade where id = ?";
 		
@@ -193,6 +193,10 @@ public class GradeDAO {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public int count() {
+		return 0;
 	}
 
 }
