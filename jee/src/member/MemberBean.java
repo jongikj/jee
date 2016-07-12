@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @story  :
 */
 public class MemberBean {
-	private String id, pw, name, regDate, gender, ssn;
+	private String id, pw, name, regDate, gender, ssn, profileImg;
 	private int birth;
 	
 	public MemberBean() {}
@@ -71,6 +71,14 @@ public class MemberBean {
 
 	public void setBirth(int birth) {
 		this.birth = birth;
+	}
+	
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
 	}
 
 	public String getId() {
