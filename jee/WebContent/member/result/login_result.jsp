@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="member.MemberService" %>
+    <%@ page import="member.MemberServiceImpl" %>
+    <%@ page import="member.MemberBean" %>
     <%String ctx = application.getContextPath();%>
 <!doctype html>
 <html lang="en">
@@ -11,21 +14,28 @@
 <body>
 	<div class="box">
 <%
+	MemberService service = MemberServiceImpl.getInstance();
+	MemberBean bean = new MemberBean();
+	
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
-	if(id != null 
-			&& id.equals("jang")
-			&& pw != null
-			&& pw.equals("1")){
-		response.sendRedirect(ctx + "/global/main.jsp");
-	}else{
-		application.log("넘어온 ID : " + id);
-		application.log("넘어온 PW : " + pw);
+	if(id == null && pw == null){
 		%>
 		<h2>로그인 실패</h2>
-		<a href="<%=ctx %>/service/login.jsp">다시 시도하기</a><br />
+		<a href="<%=ctx %>/member/service/login.jsp">다시 시도하기</a><br />
 		<% 	
-		application.log("리얼패스" + application.getContextPath());
+	}else{
+		bean.setId(id);
+		bean.setPw(pw);
+		String name = service.login(bean);
+		if(name == null){
+			%>
+			<h2>로그인 실패</h2>
+			<a href="<%=ctx %>/member/service/login.jsp">다시 시도하기</a><br />
+			<%
+		}else{
+			response.sendRedirect(ctx + "/global/main.jsp");	
+		}
 	}
 %>
 </div>
