@@ -96,11 +96,11 @@ public class MemberServiceImpl implements MemberService{
 	public String login(MemberBean bean) {
 		String result = "";
 		if (dao.login(bean)) {
-			result = "로그인 성공";
 			session = dao.findById(bean.getId());
+			result = session.getName();
 			accService.map();
 		} else {
-			result = "로그인 실패";
+			result = "";
 		}
 		return result;
 	}

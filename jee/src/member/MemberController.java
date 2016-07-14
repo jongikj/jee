@@ -3,6 +3,7 @@
  */
 package member;
 
+import javax.print.attribute.standard.JobKOctetsProcessed;
 import javax.swing.JOptionPane;
 
 import global.Constants;
@@ -40,7 +41,13 @@ public class MemberController {
 				break;
 				
 			case "2":
-//				JOptionPane.showMessageDialog(null, Constants.SCHOOL_NAME + ", " + service.show());
+				MemberBean tempBean2 = new MemberBean();
+				String input2 = JOptionPane.showInputDialog("ID,PW");
+				String[] inputArr2 = input2.split(",");
+				tempBean2.setId(inputArr2[0]);
+				tempBean2.setPw(inputArr2[1]);
+				String result2 = service.login(tempBean2);
+				JOptionPane.showMessageDialog(null, result2);
 				break;
 				
 			case "4":

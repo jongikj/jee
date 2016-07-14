@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="member.MemberBean" %>
+    <%@ page import="member.MemberService" %>
+    <%@ page import="member.MemberServiceImpl" %>
     <%String ctx = application.getContextPath();%>
 <!doctype html>
 <html lang="en">
@@ -14,6 +17,38 @@
 </head>
 <body>
 	<div class="box">
+	<%
+	MemberService service = MemberServiceImpl.getInstance();
+	MemberBean bean = new MemberBean();
+	
+	String name = request.getParameter("name");
+	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
+	String ssn = request.getParameter("ssn");
+	
+	if(name == "" || id == "" || pw == "" || ssn == ""){
+		%>
+		<h2>회원가입 실패</h2>
+		<a href="<%=ctx %>/member/service/regist.jsp">다시 시도하기</a><br />
+		<%
+	} else {
+		bean.setName(name);
+		bean.setId(id);
+		bean.setPw(pw);
+		bean.setSsn(ssn);
+		bean.setRegDate();
+		String str = service.regist(bean);
+		if(str == ""){
+			%>
+			<h2>회원가입 실패</h2>
+			<a href="<%=ctx %>/member/service/regist.jsp">다시 시도하기</a><br />
+			<%
+		} else {
+			response.sendRedirect(ctx + "/member/service/login.jsp");
+		}
+	}
+	
+	%>
 			<span class="meta">이름</span> <%=request.getParameter("name")%> <br/>
 			<span class="meta">ID</span> <%=request.getParameter("id")%> <br/>
 			<span class="meta">비밀번호</span> <%=request.getParameter("pw")%> <br/>

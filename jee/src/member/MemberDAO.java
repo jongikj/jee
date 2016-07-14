@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,16 @@ public class MemberDAO {
 	}
 
 	private MemberDAO() { // 1. private 생성자를 만든다
+		try {
+			Class.forName(Constants.ORACLE_DRIVER);
+			con = DriverManager.getConnection(
+					Constants.ORACLE_URL, 
+					Constants.USER_ID, 
+					Constants.USER_PW);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public int insert(MemberBean bean){
@@ -181,12 +192,37 @@ public class MemberDAO {
 		return count;
 	}
 
-	public boolean login(MemberBean bean) {
+	public boolean login(MemberBean param) {
 		boolean loginOK = false;
-		MemberBean m = this.findById(bean.getId());
-		if (m.getPw().equals(bean.getPw())){
-			loginOK = true;
+		if(param.getId() != null && param.getPw() != null && this.existId(param.getId())){
+			MemberBean bean = this.findById(param.getId());
+			if (bean.getPw().equals(param.getPw())){
+				loginOK = true;
+			}
 		}
 		return loginOK;
+	}
+	
+	public boolean existId(String id){
+		boolean existOK = false;
+		int result = 0;
+		String sql = "select count(*) as count from member where id = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result  = rs.getInt("count");
+				System.out.println("ID 카운트 결과 : " + result);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(result == 1){
+			existOK = true;
+		}
+		return existOK;
 	}
 }

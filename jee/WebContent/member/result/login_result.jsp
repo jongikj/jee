@@ -19,7 +19,9 @@
 	
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
-	if(id == null && pw == null){
+	application.log("넘어온 ID : " + id);
+	application.log("넘어온 pw : " + pw);
+	if(id == "" || pw == ""){
 		%>
 		<h2>로그인 실패</h2>
 		<a href="<%=ctx %>/member/service/login.jsp">다시 시도하기</a><br />
@@ -28,7 +30,8 @@
 		bean.setId(id);
 		bean.setPw(pw);
 		String name = service.login(bean);
-		if(name == null){
+		application.log("DB다녀온 이름 : " + name);
+		if(name == ""){
 			%>
 			<h2>로그인 실패</h2>
 			<a href="<%=ctx %>/member/service/login.jsp">다시 시도하기</a><br />

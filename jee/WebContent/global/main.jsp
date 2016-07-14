@@ -68,7 +68,7 @@
 			<li><a href="school_info.jsp">학교소개</a></li>
 		</ul>
 	</div>
-
+	
 	<div id="section">
 		<h2>회원관리</h2>
 		<p>London is the capital city of England. It is the most populous city in the United Kingdom,
