@@ -7,6 +7,7 @@ import javax.print.attribute.standard.JobKOctetsProcessed;
 import javax.swing.JOptionPane;
 
 import global.Constants;
+import sun.print.resources.serviceui;
 
 
 /**
@@ -48,6 +49,9 @@ public class MemberController {
 				tempBean2.setPw(inputArr2[1]);
 				String result2 = service.login(tempBean2);
 				JOptionPane.showMessageDialog(null, result2);
+				break;
+				
+			case "3":
 				break;
 				
 			case "4":

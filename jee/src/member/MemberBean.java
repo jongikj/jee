@@ -15,7 +15,8 @@ import javax.swing.JOptionPane;
  * @story  :
 */
 public class MemberBean {
-	private String id, pw, name, regDate, gender, ssn, profileImg;
+	private String id, pw, name, regDate, gender, ssn, profileImg, email;
+
 	private int birth;
 	
 	public MemberBean() {}
@@ -28,7 +29,6 @@ public class MemberBean {
 		this.gender = null;
 		this.regDate = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
 		String[] arr = new String[2];
-		
 		arr = ssn.split("-");
 
 		if (Integer.parseInt(arr[1]) == 0 || Integer.parseInt(arr[1]) == 9) {
@@ -43,6 +43,14 @@ public class MemberBean {
 			this.gender = "여";
 			break;
 		}
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	public void setSsn(String ssn){
@@ -96,6 +104,39 @@ public class MemberBean {
 	public String getRegDate() {
 		return this.regDate;
 	}
+	
+	public void setGenderAndBirth(String ssn) {
+		String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
+		this.regDate = now;
+		String[] ssnArr = ssn.split("-");
+		String[] nowArr = now.split("-");
+		int ssnBirth = (Integer.parseInt(ssnArr[0]));
+		int ssnGender = (Integer.parseInt(ssnArr[1]));
+		int thisYear = (Integer.parseInt(nowArr[0]));
+		int age = 0;
+		switch (ssnGender) {
+		case 1: case 5: 
+			this.gender="남"; 
+//			age = ageResult2 - 1900-(ageResult1/10000);
+//			나이를 구하려고 했으나 보류
+			this.birth = ssnBirth;
+			break;
+		case 3: case 7:
+			this.gender="남"; 
+			this.birth = ssnBirth;
+			break;
+		case 2: case 6:
+			this.gender="여";
+			this.birth = ssnBirth;
+			break;
+		case 4: case 8:
+			this.gender="여";
+			this.birth = ssnBirth;
+			break;
+		default:
+			System.out.println("잘못된값이 입력됨");
+		}
+	}
 
 	public String getGender() {
 		return this.gender;
@@ -104,14 +145,14 @@ public class MemberBean {
 	public String getSsn() {
 		return this.ssn;
 	}
-
+	
 	public int getBirth() {
 		return this.birth;
 	}
 
 	@Override
 	public String toString() {
-		return "id=" + id + ", pw=" + pw + ", 이름=" + name + ", 등록일=" + regDate + ", 성별=" + gender
+		return "id=" + id + ", pw=" + pw + ", 이메일=" + email + ", 이름=" + name + ", 등록일=" + regDate + ", 성별=" + gender
 				+ ", 주민번호=" + ssn + ", 나이=" + birth;
 	}
 }

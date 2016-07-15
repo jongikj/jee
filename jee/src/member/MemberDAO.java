@@ -50,8 +50,19 @@ public class MemberDAO {
 	}
 	
 	public int update(MemberBean bean){
-		String sql = "update member set pw = '" + bean.getPw() + "' where id = '" + bean.getId() + "' ";
-		return exeUpdate(sql);
+		int result = 0;
+		String sql = "update member set pw = ? where id = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getPw());
+			pstmt.setString(2, bean.getId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 	public int delete(String id){
@@ -97,12 +108,14 @@ public class MemberDAO {
 			rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
-				MemberBean tempBean = new MemberBean(
-						rs.getString("NAME"),
-						rs.getString("ID"),
-						rs.getString("PW"),
-						rs.getString("SSN"));
+				MemberBean tempBean = new MemberBean();
+				tempBean.setId(rs.getString("ID"));
+				tempBean.setPw(rs.getString("PW"));
+				tempBean.setName(rs.getString("NAME"));
+				tempBean.setEmail(rs.getString("EMAIL"));
+				tempBean.setGenderAndBirth(rs.getString("SSN"));
 				tempBean.setRegDate(rs.getString("REG_DATE"));
+				tempBean.setProfileImg(rs.getString("PROFILE_IMG"));
 				list.add(tempBean);
 			}
 		} catch (Exception e) {
@@ -115,7 +128,7 @@ public class MemberDAO {
 	//findByPK
 	public MemberBean findById(String id) {
 		String sql = "select * from member where id = '" + id + "'";
-		MemberBean temp = null;
+		MemberBean temp = new MemberBean();
 		try {
 			Class.forName(Constants.ORACLE_DRIVER);
 			con = DriverManager.getConnection(
@@ -124,13 +137,21 @@ public class MemberDAO {
 					Constants.USER_PW);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
-			while (rs.next()){
-				temp = new MemberBean(
-						rs.getString("NAME"),
-						rs.getString("ID"),
-						rs.getString("PW"),
-						rs.getString("SSN"));
+			if (rs.next()){
+//				temp = new MemberBean(
+//						rs.getString("NAME"),
+//						rs.getString("ID"),
+//						rs.getString("PW"),
+//						rs.getString("SSN"));
+//				temp.setRegDate(rs.getString("REG_DATE"));
+				temp.setId(rs.getString("ID"));
+				temp.setPw(rs.getString("PW"));
+				temp.setName(rs.getString("NAME"));
 				temp.setRegDate(rs.getString("REG_DATE"));
+				temp.setSsn(rs.getString("SSN"));
+				temp.setGenderAndBirth(rs.getString("SSN"));
+				temp.setEmail(rs.getString("EMAIL"));
+				temp.setProfileImg(rs.getString("PROFILE_IMG"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

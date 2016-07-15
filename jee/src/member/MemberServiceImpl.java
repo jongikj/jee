@@ -20,6 +20,7 @@ public class MemberServiceImpl implements MemberService{
 	private static MemberServiceImpl instance = new MemberServiceImpl();
 	
 	private MemberServiceImpl() {
+		session = new MemberBean();
 	}
 	
 	public static MemberServiceImpl getInstance() {
@@ -56,6 +57,7 @@ public class MemberServiceImpl implements MemberService{
 		String result = "";
 		if (dao.delete(id) == 1) {
 			result = "삭제성공";
+			session = null;
 		} else {
 			result = "삭제실패";
 		}
@@ -103,5 +105,15 @@ public class MemberServiceImpl implements MemberService{
 			result = "";
 		}
 		return result;
+	}
+
+	@Override
+	public boolean existId(String id) {
+		return dao.existId(id);
+	}
+
+	@Override
+	public MemberBean findBy() {
+		return session;
 	}
 }

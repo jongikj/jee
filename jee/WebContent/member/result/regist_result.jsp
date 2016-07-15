@@ -27,7 +27,7 @@
 	String pw = request.getParameter("pw");
 	String ssn = request.getParameter("ssn");
 	
-	if(name == "" || id == "" || pw == "" || ssn == ""){
+	if(name == "" || id == "" || pw == "" || ssn == "" || service.existId(id)){
 		%>
 		<h2>회원가입 실패</h2>
 		<a href="<%=ctx %>/member/service/regist.jsp">다시 시도하기</a><br />
@@ -40,16 +40,12 @@
 		bean.setRegDate();
 		String str = service.regist(bean);
 		if(str == ""){
-			%>
-			<h2>회원가입 실패</h2>
-			<a href="<%=ctx %>/member/service/regist.jsp">다시 시도하기</a><br />
-			<%
+		%>
+		<h2>회원가입 실패</h2>
+		<a href="<%=ctx %>/member/service/regist.jsp">다시 시도하기</a><br />
+		<%
 		} else {
-			response.sendRedirect(ctx + "/member/service/login.jsp");
-		}
-	}
-	
-	%>
+		%>
 			<span class="meta">이름</span> <%=request.getParameter("name")%> <br/>
 			<span class="meta">ID</span> <%=request.getParameter("id")%> <br/>
 			<span class="meta">비밀번호</span> <%=request.getParameter("pw")%> <br/>
@@ -68,6 +64,11 @@
 			%>
 			<br /><br />
 			회원가입을 축하드립니다. <%=request.getParameter("name") %> 님<br />
+			<% 
+		}
+	}
+	
+	%>
 		<a href="<%=ctx %>/member/member_controller.jsp">
 			<img src="<%=ctx %>/img/member.png" alt="member" style="width: 50px">
 		</a>

@@ -20,4 +20,6 @@ public interface MemberService extends CommonService{
 	public MemberBean findById(String id);
 	public List<MemberBean> findByName(String findName);
 	public String login(MemberBean bean);
+	public boolean existId(String id);
+	public MemberBean findBy();
 }
