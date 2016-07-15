@@ -3,7 +3,8 @@
     <%@ page import="member.MemberBean" %>
     <%@ page import="member.MemberService" %>
     <%@ page import="member.MemberServiceImpl" %>
-    <%String ctx = application.getContextPath();%>
+    <%String ctx = application.getContextPath();
+    %>
 <!doctype html>
 <html lang="en">
 <head>

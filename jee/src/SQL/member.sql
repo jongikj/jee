@@ -22,4 +22,4 @@ select count(*) as count from MEMBER; -- count
 -- UPDATE
 update member set pw = '999' where id = 'yu';
 -- DELETE
-delete from member where id = 'null';
+delete from member where id = 'jing';
