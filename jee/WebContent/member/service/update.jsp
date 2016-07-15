@@ -18,7 +18,9 @@
 	</style>
 </head>
 <body>
-<!-- id, birth, name, regDate, gender, profileImg -->
+<!-- id, birth, name, regDate, gender, profileImg 
+	findBy().getName()이 null이면 접근 안되게 수정
+-->
 	<div class ="box" style="width:500px;margin: 0 auto;text-align: center;">
 		<h1>회원 상세정보</h1><br/>
 		<%MemberService service = MemberServiceImpl.getInstance(); %>
