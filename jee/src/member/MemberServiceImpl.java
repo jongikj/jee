@@ -3,6 +3,8 @@ package member;
 import java.util.List;
 import java.util.Map;
 
+import com.sun.glass.ui.Application;
+
 import bank.AccountService;
 import bank.AccountServiceImpl;
 
@@ -30,7 +32,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public String regist(MemberBean bean) {
 		String msg = "";
-	
 		int result = dao.insert(bean);
 		
 		if (result == 1 ){
@@ -42,26 +43,19 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public String update(MemberBean bean) {
-		String result = "";
-		if (dao.update(bean) == 1) {
-			result = "수정 성공";
-		} else {
-			result = "수정 실패";
+	public void update(MemberBean bean) {
+		int result = dao.update(bean);
+		if (result == 1) {
+			session = this.findById(bean.getId());
 		}
-		return result;
 	}
 
 	@Override
-	public String delete(String id) {
-		String result = "";
-		if (dao.delete(id) == 1) {
-			result = "삭제성공";
+	public void delete(MemberBean bean) {
+		int result = dao.delete(bean);
+		if(result == 1){
 			session = null;
-		} else {
-			result = "삭제실패";
 		}
-		return result;
 	}
 	
 	public int count(){
@@ -115,5 +109,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberBean findBy() {
 		return session;
+	}
+	
+	public void logout(MemberBean bean){
+		if(bean.getId().equals(session.getId()) && bean.getPw().equals(session.getPw())){
+			this.session = null;
+		}
 	}
 }

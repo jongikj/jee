@@ -60,12 +60,12 @@ public class MemberController {
 				String[] tempArr3 = tempStr3.split(",");
 				tempBean3.setId(tempArr3[0]);
 				tempBean3.setPw(tempArr3[1]);
-				JOptionPane.showMessageDialog(null, service.update(tempBean3));
+				service.update(tempBean3);
 				break;
 				
 			case "5":
 				String tempStr4 = JOptionPane.showInputDialog("삭제할 ID");
-				JOptionPane.showMessageDialog(null, service.delete(tempStr4));
+//				JOptionPane.showMessageDialog(null, service.delete(tempStr4));
 				break;
 				
 			case "11":

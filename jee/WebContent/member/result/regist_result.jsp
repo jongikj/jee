@@ -26,8 +26,9 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	String ssn = request.getParameter("ssn");
+	String email = request.getParameter("email");
 	
-	if(name == "" || id == "" || pw == "" || ssn == "" || service.existId(id)){
+	if(name == "" || id == "" || pw == "" || ssn == "" || email == "" || service.existId(id)){
 		%>
 		<h2>회원가입 실패</h2>
 		<a href="<%=ctx %>/member/service/regist.jsp">다시 시도하기</a><br />
@@ -37,6 +38,7 @@
 		bean.setId(id);
 		bean.setPw(pw);
 		bean.setSsn(ssn);
+		bean.setEmail(email);
 		bean.setRegDate();
 		String str = service.regist(bean);
 		if(str == ""){
@@ -50,6 +52,7 @@
 			<span class="meta">ID</span> <%=request.getParameter("id")%> <br/>
 			<span class="meta">비밀번호</span> <%=request.getParameter("pw")%> <br/>
 			<span class="meta">SSN</span> <%=request.getParameter("ssn")%> <br />
+			<span class="meta">이메일</span> <%=request.getParameter("email") %><br />
 			<span class="meta">전공</span> <%=request.getParameter("major") %><br />
 			<span class="meta">수강과목</span>
 			<% 

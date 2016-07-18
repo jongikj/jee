@@ -8,26 +8,24 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>탈퇴완료</title>
+	<title>로그인</title>
 	<link rel="stylesheet" href="<%=ctx %>/css/member.css" />
 </head>
 <body>
 	<div class="box">
-	<%
+<%
 	MemberService service = MemberServiceImpl.getInstance();
+	MemberBean bean = new MemberBean();
+	
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
-	
-	if(id.equals(service.findById(id).getId()) && pw.equals(service.findById(id).getPw())){
-		service.delete(service.findById(id));
-		response.sendRedirect(ctx + "/index.jsp");
-	} else {
-		%>
-		<h1>정보를 정확히 입력해주세요</h1>
-		<a href="<%=ctx%>/member/service/delete.jsp">다시 시도하기</a><br/>
-		<%
-	}
-	%>
-	</div>
+	application.log("넘어온 ID : " + id);
+	application.log("넘어온 pw : " + pw);
+	bean.setId(id);
+	bean.setPw(pw);
+	service.logout(bean);
+	response.sendRedirect(ctx + "/index.jsp");	
+%>
+</div>
 </body>
 </html>

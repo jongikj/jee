@@ -1,3 +1,4 @@
+<%@page import="sun.print.resources.serviceui"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="member.MemberService" %>
@@ -22,8 +23,18 @@
 	findBy().getName()이 null이면 접근 안되게 수정
 -->
 	<div class ="box" style="width:500px;margin: 0 auto;text-align: center;">
-		<h1>회원 상세정보</h1><br/>
-		<%MemberService service = MemberServiceImpl.getInstance(); %>
+		<%
+		MemberService service = MemberServiceImpl.getInstance(); 
+		if(service.findBy() == null || service.findBy().getId() == null){
+			%>
+			<h1>로그인을 해주세요</h1>
+			<a href="<%=ctx%>/member/service/login.jsp">로그인 하기</a><br/>
+			<%
+		} else {
+			
+		%>
+		<h1>회원 정보수정</h1><br/>
+		<form action="<%=ctx %>/member/result/update_result.jsp" method="post">
 		<table id="member_detail">
 			<tr>
 				<td rowspan="5" width="30%"><img src="<%=ctx %>/img/member/<%=service.findBy().getProfileImg() %>" alt="W3Schools.com" width="104" height="142"><br/></td>
@@ -55,7 +66,13 @@
 				<td colspan="2"><%=service.findBy().getRegDate() %></td>
 			</tr>
 		</table>
-		
+		<input type="hidden" name="id" value="<%=service.findBy().getId() %>"/>
+		<input type="submit" value="수정"/>
+		<input type="reset" value="취소"/>
+		</form>
+	<% 
+		}
+	%>		
 		<a href="<%=ctx %>/member/member_controller.jsp">
 			<img src="<%=ctx %>/img/member.png" alt="member" style="width: 50px">
 		</a>

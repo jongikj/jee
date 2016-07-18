@@ -15,11 +15,12 @@ import global.CommonService;
 */
 public interface MemberService extends CommonService{
 	public String regist(MemberBean bean);
-	public String update(MemberBean bean);
-	public String delete(String id);
+	public void update(MemberBean bean);
+	public void delete(MemberBean bean);
 	public MemberBean findById(String id);
 	public List<MemberBean> findByName(String findName);
 	public String login(MemberBean bean);
 	public boolean existId(String id);
 	public MemberBean findBy();
+	public void logout(MemberBean bean);
 }

@@ -13,22 +13,19 @@
 </head>
 <body>
 	<div class = "box">
-	<%if(request.getParameter("pw") != ""){  %>
-		<h1>변경이 완료되었습니다.</h1>
 		<%
 		MemberService service = MemberServiceImpl.getInstance();
-		MemberBean bean = new MemberBean();
+		MemberBean bean = service.findById(request.getParameter("id"));
 		String pw = request.getParameter("pw");
-		service.findBy().setPw(pw);
-		service.update(service.findBy());
+		String email = request.getParameter("email");
 		
-	} else {
+		bean.setPw(pw);
+		bean.setEmail(email);
+		
+		service.update(bean);
+		response.sendRedirect(ctx + "/member/service/detail.jsp");
 		%>
-		<h1>변경할 비밀번호를 입력해주세요.</h1>
-		<a href="<%=ctx%>/member/service/update.jsp">다시 시도하기</a><br/>
-		<%
-	}
-		%>
+		
 		<a href="<%=ctx %>/member/member_controller.jsp">
 			<img src="<%=ctx %>/img/member.png" alt="member" style="width: 50px">
 		</a>

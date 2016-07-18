@@ -43,42 +43,77 @@ public class MemberDAO {
 	}
 	
 	public int insert(MemberBean bean){
-		String sql = "insert into member(id, pw, name, reg_date, ssn)"
-				+ "values('" + bean.getId() + "', '" + bean.getPw() + "', '" + bean.getName() + "', '"
-				+ bean.getRegDate() + "', '" + bean.getSsn() + "')";
-		return exeUpdate(sql);
+		int result = 0;
+		String sql = "insert into member(id, pw, name, reg_date, ssn, email)"
+				+ " values(?, ?, ?, ?, ?, ?)";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getId());
+			pstmt.setString(2, bean.getPw());
+			pstmt.setString(3, bean.getName());
+			pstmt.setString(4, bean.getRegDate());
+			pstmt.setString(5, bean.getSsn());
+			pstmt.setString(6, bean.getEmail());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(result == 1){
+			System.out.println("성공");
+		} else {
+			System.out.println("실패");
+		}
+		return result;
 	}
 	
 	public int update(MemberBean bean){
 		int result = 0;
-		String sql = "update member set pw = ? where id = ?";
+		String sql = "update member set pw = ?, email = ? where id = ?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getPw());
-			pstmt.setString(2, bean.getId());
+			pstmt.setString(2, bean.getEmail());
+			pstmt.setString(3, bean.getId());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		if(result == 1){
+			System.out.println("DAO에서 수정 성공");
+		} else {
+			System.out.println("DAO에서 수정 실패");
+		}
 		return result;
 	}
 	
-	public int delete(String id){
-		String sql = "delete from member where id = '" + id + "'";
-		return exeUpdate(sql);
+	public int delete(MemberBean bean){
+		int result = 0;
+		String sql = "delete from member where id = ? and pw = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getId());
+			pstmt.setString(2, bean.getPw());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(result == 1){
+			System.out.println("DAO에서 삭제 성공");
+		} else {
+			System.out.println("DAO에서 삭제 실패");
+		}
+		return result;
 	}
 	
 	public int exeUpdate(String sql) {
 		int updateResult = 0;
 		
 		try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			con = DriverManager.getConnection(
-					Constants.ORACLE_URL, 
-					Constants.USER_ID, 
-					Constants.USER_PW);
 			stmt = con.createStatement();
 			updateResult = stmt.executeUpdate(sql);
 		} catch (Exception e) {
