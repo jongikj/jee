@@ -3,6 +3,7 @@
  */
 package bank2;
 
+import java.io.Serializable;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import global.Constants;
@@ -13,7 +14,7 @@ import global.Constants;
  * @file   :Account.java
  * @story  :
 */
-public class AccountBean {
+public class AccountBean implements Serializable{
 	private int accountNo; // 인스턴스 변수는 초기화를 하지 않는다.
 	private int money;
 	private String name;

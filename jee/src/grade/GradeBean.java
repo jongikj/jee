@@ -1,6 +1,9 @@
 package grade;
 
-public class GradeBean {
+import java.io.Serializable;
+
+public class GradeBean implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String id, grade, seq, examDate;
 	private int java, sql, html, javascript;
 	

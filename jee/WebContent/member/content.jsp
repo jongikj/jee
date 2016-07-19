@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="../global/top.jsp"/>
 <style>
 	div.memberClass{font-size: x-large;}
 </style>
 <div id="" class="memberClass box">
-	<h1>회원관리</h1>
+	<h2>회원관리</h2>
 	<div style="width: 300px; margin: 0 auto; text-align: left;">
 		<ol>
 			<li><a href="service/regist.jsp">회원가입</a></li>

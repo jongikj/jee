@@ -3,6 +3,8 @@
  */
 package bank;
 
+import java.io.Serializable;
+
 import global.Constants;
 
 /**
@@ -11,7 +13,8 @@ import global.Constants;
  * @file   :Account.java
  * @story  :
 */
-public class AccountBean {
+public class AccountBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int accountNo; // 인스턴스 변수는 초기화를 하지 않는다.
 	private int money;
 	private String name;

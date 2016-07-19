@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     <%@page import="member.MemberService" %>
     <%@page import="member.MemberServiceImpl" %>
-    <%String ctx = application.getContextPath();%>
 <!doctype html>
 <html lang="en">
 <head>

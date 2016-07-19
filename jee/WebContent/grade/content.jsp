@@ -3,7 +3,7 @@
 	div.memberClass{font-size: x-large;}
 </style>
 <div id="" class="memberClass box">
-	<h1>성적관리</h1>
+	<h2>성적관리</h2>
 	<div style="width: 300px; margin: 0 auto; text-align: left;">
 		<ol>
 			<li><a href="service/regist.jsp">등록</a></li>

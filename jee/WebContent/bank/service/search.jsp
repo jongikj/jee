@@ -2,8 +2,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>한빛아카데미</title>
-<link rel="stylesheet" href="<%=ctx%>/css/global.css" />
+	<meta charset="UTF-8" />
+	<title>Document</title>
 </head>
 <body>
+	
+</body>
+</html>
